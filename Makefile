@@ -1,24 +1,46 @@
-# Makefile for Project One reference implemention.
-# You will clearly need to change this depending on your language and implementation.
+# # # # # # # # # # # # # # # # # # # # # # #
+#											#
+#	Makefile								#
+#											#
+#	Target Executable:		reader			#
+#											#
+#	File Dependecies:		main.cpp		#
+#							parser.h		#
+#							parser.cpp		#
+#							scanner.h		#
+#							scanner.cpp		#
+#											#
+#	Creates Object Files:	main.o			#
+#							parser.o		#
+#							scanner.o		#
+#											#
+#	Written by:	Austin James Lee			#
+#											#
+# # # # # # # # # # # # # # # # # # # # # # #
 
-CFLAGS=-Wall -O2
-#CFLAGS=-Wall g -O0
+OUT = reader
+CFLAGS = -Wall -pedantic -O2 -std=$(CPP)
+CC = g++
+CPP = c++11
 
-reader:		lexing.o parsing.o 
-		gcc $(CFLAGS) -o reader lexing.o parsing.o
 
-parsing.o:	lexing.h parsing.c parsing.h
-		gcc $(CFLAGS) -c parsing.c
+$(OUT):		scanner.o parser.o main.o
+			$(CC) $(CFLAGS) -o $@ scanner.o parser.o main.o
 
-lexing.o:	lexing.c lexing.h 
-		gcc $(CFLAGS) -c lexing.c
+main.o:		main.cpp
+			$(CC) $(CFLAGS) -c main.cpp
+
+parser.o:	parser.h parser.cpp
+			$(CC) $(CFLAGS) -c parser.cpp
+
+scanner.o:	scanner.h scanner.cpp
+			$(CC) $(CFLAGS) -c scanner.cpp
+
+.PHONY:		clean
 
 clean:
-		rm *.o
-		rm reader 
+			rm *.o
+			rm $(OUT)
 
-wc:		
-		wc -l lexing.h lexing.c parsing.h parsing.c alloc.h alloc.c
-
-export:		lexing.c parsing.c lexing.h parsing.h Makefile README
-		tar cvf export.tar Makefile README *.c *.h 
+lines:
+			wc -l *.h *.cpp | grep total
