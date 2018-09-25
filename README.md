@@ -7,4 +7,4 @@ For additional information regarding invocation or usage,
 simply enter
 	`reader -h`
 or
-	`reader --help`
+	`reader --help`.
