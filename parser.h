@@ -36,7 +36,7 @@ struct Instruction {
 class Parser {
 	public:
 		// constructor (calls parse)
-		Parser(string infile, bool sp, bool pp);
+		Parser(string infile, bool=false, bool=false);
 		list<Instruction> intRep;	// list representing IR
 	private:
 		Scanner scanner;	// Scanner used to scan tokens

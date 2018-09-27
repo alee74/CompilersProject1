@@ -73,7 +73,7 @@ struct Token {
 class Scanner {
 	public:
 		Scanner();					// default constructor
-		Scanner(string f, bool p);	// normal constructor
+		Scanner(string f, bool=false);	// normal constructor
 		Scanner(const Scanner& s);	// copy constructor
 		~Scanner();				// deconstructor, closes input file stream
 		int line();				// external access to current line number

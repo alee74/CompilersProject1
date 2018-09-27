@@ -11,10 +11,7 @@
  *                              						 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#pragma once
-
 #include "parser.h"
-
 
 
 //// Instruction constructors ////
@@ -22,12 +19,12 @@
 
 // default consturctor
 Instruction::Instruction()
-			:src1(INVALID), src2(INVALID), dest(INVALID) {}
+			:src1{INVALID}, src2{INVALID}, dest{INVALID} {}
 
 
 // overloaded constructor
 Instruction::Instruction(Opcode o)
-			:op(o), src1(INVALID), src2(INVALID), dest(INVALID) {}
+			:op{o}, src1{INVALID}, src2{INVALID}, dest{INVALID} {}
 
 
 
@@ -37,7 +34,7 @@ Instruction::Instruction(Opcode o)
 // constructor (public)
 // takes file name and "scanner print" bool to construct Scanner,
 // and another bool "parser print" indicating whether to print IR
-Parser::Parser(string infile, bool sp, bool pp) :scanner(Scanner(infile, sp)) {
+Parser::Parser(string infile, bool sp, bool pp) :scanner{infile, sp} {
 	// parse until EOF or error
 	parse();
 	// print?

@@ -11,10 +11,7 @@
  *                              									 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#pragma once
-
 #include "scanner.h"
-
 
 
 //// Token constructors ////
@@ -24,11 +21,11 @@
 // Token "default" constructor
 // constructs "invalid" Tokens.
 // only returned to indicate EOF.
-Token::Token() :cat(INVALID), value(INT_MIN) {}
+Token::Token() :cat{INVALID}, value{INT_MIN} {}
 
 
 // valid Token constructor
-Token::Token(TokenCat tc, int v) :cat(tc), value(v) {}
+Token::Token(TokenCat tc, int v) :cat{tc}, value{v} {}
 
 
 
@@ -37,21 +34,21 @@ Token::Token(TokenCat tc, int v) :cat(tc), value(v) {}
 
 
 // Scanner default constructor
-Scanner::Scanner() :infile(""), print(false), ln(-1), pos(-1) {}
+Scanner::Scanner() :infile{""}, print{false}, ln{-1}, pos{-1} {}
 
 
 // Scanner constructor
 // takes input file's name and opens ifstream.
 // also takes bool indicating whether -t option was passed.
 // initializes line to 1 and pos to 0.
-Scanner::Scanner(string f, bool p) :infile(f), print(p), ln(1), pos(0) {
+Scanner::Scanner(string f, bool p) :infile{f}, print{p}, ln{1}, pos{0} {
 	input.open(infile);
 }
 
 
 // Scanner copy constructor
 Scanner::Scanner(const Scanner& s)
-		:infile(s.infile), print(s.print), ln(s.ln), pos(s.pos) {
+		:infile{s.infile}, print{s.print}, ln{s.ln}, pos{s.pos} {
 	input.open(infile);
 }
 
@@ -93,14 +90,14 @@ Token Scanner::scanToken() {
 		case '=':
 			get();
 			if (get() == '>')
-				ret = Token (Arrow, -1);
+				ret = Token {Arrow, -1};
 			else
 				error("expected assignment arrow");
 			break;
 
 		case ',':
 			get();
-			ret = Token (Comma, -1);
+			ret = Token {Comma, -1};
 			break;
 
 		case '/':
@@ -112,7 +109,7 @@ Token Scanner::scanToken() {
 			if (isalpha(input.peek()))
 				ret = scanAlpha();
 			else if (isdigit(input.peek()))
-				ret = Token (Constant, scanNumber());
+				ret = Token {Constant, scanNumber()};
 			else
 				error("invalid character to start Token");
 			break;
@@ -157,7 +154,7 @@ Token Scanner::scanInstruction() {
 	else if (ln == 1)
 		error("all ILOC operations must begin on a new line");
 
-	Token ret = Token (Instruct, INT_MIN);
+	Token ret = Token {Instruct, INT_MIN};
 	switch (get()) {
 
 		case 's':
@@ -284,7 +281,7 @@ Token Scanner::scanRegister() {
 	Token ret = Token();
 	if (get() == 'r') {
 		if (isdigit(input.peek())) {
-			ret = Token (Register, scanNumber());
+			ret = Token {Register, scanNumber()};
 			removeWS();
 		} else
 			error("expected register number");
@@ -306,7 +303,7 @@ Token Scanner::scanRegister() {
 Token Scanner::scanConstant() {
 	Token ret = Token();
 	if (isdigit(input.peek())) {
-		ret = Token (Constant, scanNumber());
+		ret = Token {Constant, scanNumber()};
 		removeWS();
 	} else
 		error("expected numerical constant");
@@ -327,7 +324,7 @@ Token Scanner::scanArrow() {
 	Token ret = Token();
 	if (get() == '=' && get() == '>') {
 		removeWS();
-		ret = Token (Arrow, -1);
+		ret = Token {Arrow, -1};
 	} else
 		error("expected assignment arrow");
 	if (print)
@@ -346,7 +343,7 @@ Token Scanner::scanComma() {
 	Token ret = Token();
 	if (get() == ',') {
 		removeWS();
-		ret = Token (Comma, -1);
+		ret = Token {Comma, -1};
 	} else
 		error("expected comma to separate register arguments");
 	if (print)
@@ -505,7 +502,7 @@ Token Scanner::scanAlpha() {
 		case 'r':
 			// register
 			if (isdigit(input.peek()))
-				return Token (Register, scanNumber());
+				return Token {Register, scanNumber()};
 			// "rshift"
 			else if (get() == 's' && get() == 'h' &&
 				get() == 'i' && get() == 'f' && get() == 't')
@@ -557,7 +554,7 @@ Token Scanner::scanAlpha() {
 	else if (op != nop)	// bc nop can be immediately followed by NL
 		error("no whitespace following valid opcode");
 
-	return Token (Instruct, op);
+	return Token {Instruct, op};
 }
 
 
