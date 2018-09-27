@@ -11,8 +11,7 @@
  *                              						 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#ifndef PARSER_CPP
-#define PARSER_CPP
+#pragma once
 
 #include "parser.h"
 
@@ -170,5 +169,3 @@ ostream& operator<<(ostream& os, const Instruction& i) {
 	return os;
 }
 
-
-#endif

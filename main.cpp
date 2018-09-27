@@ -185,7 +185,7 @@ void printIR(Parser& p) {
 				break;
 
 			case nop:
-				cout << "nop\t|| -\t| -  | -  |";
+				cout << "nop\t|| -\t|  -  | -  |";
 				break;
 
 			// arithmetic instructions

@@ -11,8 +11,7 @@
  *                              									 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#ifndef SCANNER_CPP
-#define SCANNER_CPP
+#pragma once
 
 #include "scanner.h"
 
@@ -648,5 +647,3 @@ ostream& operator<<(ostream& os, const Token& t) {
 	return os;
 }
 
-
-#endif

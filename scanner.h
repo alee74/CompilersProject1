@@ -9,8 +9,7 @@
  *                              					 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#ifndef SCANNER_H
-#define SCANNER_H
+#pragma once
 
 #include <iostream> // ostream, cout, endl, istream, cerr
 #include <fstream>	// ifstream
@@ -101,5 +100,3 @@ class Scanner {
 		int scanNumber();		// scans and returns an int
 		Token scanAlpha();		// scanToken() helper, called on alpha characters
 };
-
-#endif

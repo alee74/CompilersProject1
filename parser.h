@@ -9,8 +9,7 @@
  *											 *
  * * * * * * * * * * * * * * * * * * * * * * */
 
-#ifndef PARSER_H
-#define PARSER_H
+#pragma once
 
 #include "scanner.h"
 #include <list>
@@ -43,6 +42,3 @@ class Parser {
 		Scanner scanner;	// Scanner used to scan tokens
 		void parse();		// main parse function
 };
-
-
-#endif
