@@ -29,3 +29,6 @@ A few notes and useful tips:
   than 8. That is to say, I did not encounter a test case that
   caused the assignment arrows to fall out of alignment for
   tab width of 9. `tabs -10` is optimal for appearance.
+
+Results: You don't match the tables precisely up to diff -w (-3).
+Total: 97/100
